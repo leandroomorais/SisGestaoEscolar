@@ -1,0 +1,78 @@
+#{extends 'main-portal-professor.html' /}
+#{set title:'SGE - Adicionar Notas' /}
+<meta charset="utf-8" />
+
+<!-- Mensagem de Sucesso -->
+#{if flash.success}
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<i class="material-icons">close</i>
+	</button>
+	<span> <b></b>${flash.success.raw()}
+	</span>
+</div>
+
+#{/if}
+
+
+<!-- Mensagem de erro -->
+
+#{if flash.error}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<i class="material-icons">close</i>
+	</button>
+	<span> <b></b>${flash.error.raw()}
+	</span>
+</div>
+#{/if}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header card-header-primary">
+						<h4 class="card-title ">Adicionar Notas na Disciplina: ${disciplina?.nomeDisciplina}</h4>
+						
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<form action="@{Notas.salvarNota}" method="post">
+							<table class="table table-striped" id="table">
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>Nota</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+								#{list items: turma.alunos, as:'aluno'}
+		                            <tr>
+		                                <td>${aluno.nome}</td>
+		                       	#{/list}           
+			                    #{list items: notas, as: 'nota'}
+			                       <td><input type="number" value="${nota?.primeiroBimestre}" name="nota.primeiroBimestre"/></td>
+			                                <td><input type="hidden" value="${aluno?.id}" name="nota.aluno.id"/></td>
+			                                  
+			                                <td><input type="hidden" value="${disciplina.id}" name="nota.disciplina.id"/></td>	
+			                   #{/list}                      
+		                            </tr>
+		                        
+		                        </tbody>
+
+							</table>
+							<button type="submit" class="btn btn-primary">Registar Nota</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,29 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET     /cadastro_aluno                         Alunos.cadastro_aluno
+GET     /cadastro_professor                     Professores.cadastro_professor  
+GET     /listarAluno                            Alunos.listarAluno  
+GET     /listarProfessor   						Professores.listarProfessor
+GET     /portal_aluno                           Alunos.portal_aluno   
+GET     /portal_secretaria                      Secretarias.portal_secretaria
+GET     /remover								Alunos.remover
+GET     /removerProfessor						Professores.removerProfessor
+GET     /cadastro_disciplina					Disciplinas.cadastro_disciplina
+GET     /cadastro_turma							Turmas.cadastro_turma
+GET     /listarTurma							Turmas.listarTurma
+GET     /listarDisciplina                       Disciplinas.listarDisciplina
+GET     /removerTurma							Turmas.removerTurma
+GET     /removerDisciplina						Disciplinas.removerDisciplina
+GET     /portal_professor						Professores.portal_professor
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

@@ -1,0 +1,311 @@
+#{extends 'main-secretaria.html' /} #{set title:'SGE - Adicionar
+professor' /}
+<meta charset="utf-8" />
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title">Adicionar um novo professor</h4>
+			</div>
+			<div class="card-body">
+				<div id="typography">
+					<div class="row">
+						<div class="content">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-body">
+												<form name="form1" action="@{Professores.salvarProfessor}"
+													method="post" enctype="multipart/form-data">
+													<div class="row">
+											
+															<div class="col-md-12">
+																<a>DADOS DO PROFESSOR</a>
+															</div>
+															<hr></hr>
+
+															<div class="col-md-8">
+																<div class="form-group">
+																	<input type="hidden" value="${secretaria?.id}"
+																		name="secretaria.id"> <label
+																		class="bmd-label-floating">Foto</label>
+
+																</div>
+															</div>
+															#{if professor?.foto?.exists()} <img height="150px"
+																width="150px"
+																src="@{Professores.fotoProfessor(professor.id)}"><br>
+															<div class="form-group">
+																<div class="form-check">
+																	<label class="form-check-label"> <input
+																		class="form-check-input" type="checkbox"
+																		name="excluirFoto">Excluir Imagem
+																	</label>
+																</div>
+															</div>
+															#{/if} #{else}
+															<div class="col-md-12">
+																<input type="file" value="${professor?.foto}"
+																	name="professor.foto">
+															</div>
+															#{/else}
+															<div class="col-md-10">
+																<div class="form-group">
+																	<input type="hidden" value="${professor?.id}"
+																		name="professor.id"> <label
+																		class="bmd-label-floating">Nome</label> <input
+																		type="text" name="professor.nome"
+																		value="${professor == null ? flash['professor.nome'] : professor.nome}"
+																		class="form-control #{ifError 'professor.nome'} is-invalid#{/ifError}">
+																	#{ifError 'professor.nome'}
+																	<div class="invalid-feedback">#{error
+																		'professor.nome' /}</div>
+																	#{/ifError}
+																</div>
+															</div>
+															<div class="col-md-2">
+																<div class="form-group">
+																	<label class="bmd-label">Data de Nascimento</label> <input
+																		type="date" name="professor.dataNascimento"
+																		value="${professor == null ? flash['professor.dataNascimento'] : professor.dataNascimento}"
+																		class="form-control #{ifError 'professor.dataNascimento'} is-invalid#{/ifError}">
+																	#{ifError 'professor.dataNascimento'}
+																	<div class="invalid-feedback">#{error
+																		'professor.dataNascimento' /}</div>
+																	#{/ifError}
+																</div>
+															</div>
+															<div class="col-md-3">
+															<div class="form-group">
+															<label>Sexo</label>
+																<select class="form-control" name="professor.sexo">
+																<option class="form-control" value>---Selecione o sexo---</option>
+																#{if professor?.sexo == 'Masculino'}
+																<option value="Masculino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}" ${'selected'}>MASCULINO</option>
+																<option value="Feminino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}">FEMININO</option>
+																#{/if}
+																#{elseif professor?.sexo == 'Feminino'}
+																<option value="Masculino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}">MASCULINO</option>
+																<option value="Feminino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}" ${'selected'}>FEMININO</option>
+																#{/elseif}
+																#{else}
+																<option value="Masculino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}">MASCULINO</option>
+																<option value="Feminino" class="form-control #{ifError 'professor.sexo'} is-invalid#{/ifError}">FEMININO</option>
+																#{/else}
+																		</select>
+																#{ifError 'professor.sexo'}
+													        	   <div class="invalid-feedback">#{error 'aluno.professor' /}</div>  	   		 
+													        	   #{/ifError}		
+															</div>
+														</div>
+															
+															<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">Matricula</label> <input
+																	type="text" name="professor.matricula"
+																	value="${professor == null ? flash['professor.matricula'] : professor.matricula}"
+																	class="form-control #{ifError 'professor.matricula'} is-invalid#{/ifError}">
+																#{ifError 'professor.matricula'}
+																<div class="invalid-feedback">#{error
+																	'professor.matricula' /}</div>
+																#{/ifError}
+
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">Senha</label> <input
+																	type="password"
+																	class="form-control #{ifError 'professor.senha'} is-invalid#{/ifError}"
+																	name="professor.senha"
+																	value="${professor == null ? flash['professor.senha'] : professor.senha}">
+																#{ifError 'professor.senha'}
+																<div class="invalid-feedback">#{error
+																	'professor.senha' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="bmd-label-floating">Email</label> <input
+																	type="email" name="professor.email"
+																	value="${professor == null ? flash['professor.email'] : professor.email}"
+																	class="form-control #{ifError 'professor.email'} is-invalid#{/ifError}">
+																#{ifError 'professor.email'}
+																<div class="invalid-feedback">#{error
+																	'professor.email' /}</div>
+																#{/ifError}
+
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">Formação</label> <input
+																	type="text" name="professor.formacao"
+																	value="${professor == null ? flash['professor.formacao'] : professor.formacao}"
+																	class="form-control #{ifError 'professor.formacao'} is-invalid#{/ifError}">
+																#{ifError 'professor.formacao'}
+																<div class="invalid-feedback">#{error
+																	'professor.formacao' /}</div>
+																#{/ifError}
+
+															</div>
+														</div>
+															<div class="col-md-12">
+																<a>DOCUMENTAÇÃO</a>
+															</div>
+															<hr></hr>
+
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">CPF</label> <input
+																	type="text" name="professor.cpf"
+																	value="${professor == null ? flash['professor.cpf'] : professor.cpf}"
+																	class="form-control #{ifError 'professor.cpf'} is-invalid#{/ifError}"
+																	maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+																	onkeydown="javascript: fMasc( this, mCPF )">
+																#{ifError 'professor.cpf'}
+																<div class="invalid-feedback">#{error
+																	'professor.cpf' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">RG</label> <input
+																	type="text" name="professor.rg"
+																	value="${professor == null ? flash['professor.rg'] : professor.rg}"
+																	class="form-control #{ifError 'professor.rg'} is-invalid#{/ifError}">
+																#{ifError 'professor.rg'}
+																<div class="invalid-feedback">#{error
+																	'professor.rg' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label-floating">Órgão Expedidor</label> <input
+																	type="text" name="professor.ExpedidorRg"
+																	value="${professor == null ? flash['professor.ExpedidorRg'] : professor.ExpedidorRg}"
+																	class="form-control #{ifError 'professor.ExpedidorRg'} is-invalid#{/ifError}">
+																#{ifError 'professor.ExpedidorRg'}
+																<div class="invalid-feedback">#{error
+																	'professor.ExpedidorRg' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="bmd-label">Data de Expedição</label> <input
+																	type="date" name="professor.dataExpedicao"
+																	value="${professor == null ? flash['professor.dataExpedicao'] : professor.dataExpedicao}"
+																	class="form-control #{ifError 'professor.dataExpedicao'} is-invalid#{/ifError}">
+																#{ifError 'professor.dataExpedicao'}
+																<div class="invalid-feedback">#{error
+																	'professor.dataExpedicao' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-12">
+																<a>ENDEREÇO</a>
+															</div>
+															<hr></hr>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="bmd-label-floating">Rua</label> <input
+																	type="text" name="professor.rua"
+																	value="${professor == null ? flash['professor.rua'] : professor.rua}"
+																	class="form-control #{ifError 'professor.rua'} is-invalid#{/ifError}">
+																#{ifError 'professor.rua'}
+																<div class="invalid-feedback">#{error
+																	'professor.rua' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-2">
+															<div class="form-group">
+																<label class="bmd-label-floating">Número da Casa</label> <input
+																	type="text" name="professor.numeroCasa"
+																	value="${professor == null ? flash['professor.numeroCasa'] : professor.numeroCasa}"
+																	class="form-control #{ifError 'professor.numeroCasa'} is-invalid#{/ifError}">
+																#{ifError 'professor.numeroCasa'}
+																<div class="invalid-feedback">#{error
+																	'professor.numeroCasa' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="bmd-label-floating">Bairro</label> <input
+																	type="text" name="professor.bairro"
+																	value="${professor == null ? flash['professor.bairro'] : professor.bairro}"
+																	class="form-control #{ifError 'professor.bairro'} is-invalid#{/ifError}">
+																#{ifError 'professor.bairro'}
+																<div class="invalid-feedback">#{error
+																	'professor.bairro' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="bmd-label-floating">UF</label> <input
+																	type="text" name="professor.uf"
+																	value="${professor == null ? flash['professor.uf'] : professor.uf}"
+																	class="form-control #{ifError 'professor.uf'} is-invalid#{/ifError}" ${professor?.id != null } id="estado3">
+																#{ifError 'professor.uf'}
+																<div class="invalid-feedback">#{error
+																	'professor.uf' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="bmd-label-floating">Cidade</label> <input
+																	type="text" name="professor.cidade"
+																	value="${professor == null ? flash['professor.cidade'] : professor.cidade}"
+																	class="form-control #{ifError 'professor.cidade'} is-invalid#{/ifError}" ${professor?.id != null } id="cidade3">
+																#{ifError 'professor.cidade'}
+																<div class="invalid-feedback">#{error
+																	'professor.cidade' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+														<div class="col-md-5">
+															<div class="form-group">
+																<label>Turma</label> <select name="professor.turma.id"
+																	class="form-control">
+																	<option value>---Selecione a Turma---</option> #{list
+																	items: turmas, as:'turma'}
+																	<option value="${turma?.id}" class="form-control"
+																		${(professor?.id !=null && professor?.turma?.id == turma.id )? 'selected':'' }>${turma.anoEscolar} ${turma.nomeTurma}</option>
+																	#{/list}
+																</select> #{ifError 'professor.turma'}
+																<div class="invalid-feedback">#{error
+																	'professor.turma' /}</div>
+																#{/ifError}
+															</div>
+														</div>
+													</div>
+
+
+													<button type="submit" class="btn btn-success pull-right">Cadastrar</button>
+													<button type="reset" class="btn btn-primary pull-right">Limpar
+														Campos</button>
+													<div class="clearfix"></div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

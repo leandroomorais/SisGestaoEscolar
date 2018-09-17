@@ -1,0 +1,97 @@
+#{extends 'main-secretaria.html' /}
+#{set title:'SGE - Adicionar Disciplina' /}
+<meta charset="utf-8" />
+ <!-- Mensagem de Sucesso -->
+#{if flash.success}
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<i class="material-icons">close</i>
+	</button>
+	<span> <b></b>${flash.success.raw()}
+	</span>
+</div>
+
+#{/if}
+
+
+<!-- Mensagem de erro -->
+
+#{if flash.error}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<i class="material-icons">close</i>
+	</button>
+	<span> <b></b>${flash.error.raw()}
+	</span>
+</div>
+#{/if}
+<div class="content">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title">Adicionar uma nova disciplina</h4>
+			</div>
+			<div class="card-body">
+				<div id="typography">
+					<div class="row">
+						<div class="content">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-body">
+												<form name="form1" action="@{Disciplinas.salvarDisciplina}"
+													method="post">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="form-group">
+																<input type="hidden" value="${disciplina?.id}"
+																	name="disciplina.id"> <label
+																	class="bmd-label-floating">Nome da disciplina</label> <input
+																	type="text" name="disciplina.nomeDisciplina"
+																	value="${disciplina == null ? flash['disciplina.nomeDisciplina'] : disciplina.nomeDisciplina}" class="form-control #{ifError 'disciplina.nomeDisciplina'} is-invalid#{/ifError}" >
+																	#{ifError 'disciplina.nomeDisciplina'}
+													        	   <div class="invalid-feedback">#{error 'disciplina.nomeDisciplina' /}</div>  	   		 
+													        	   #{/ifError}
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-group">
+																<select class="form-control"
+																	name="disciplina.professor.id">
+																	<option value>---Selecione o Professor Responsável---</option> #{list items: professores,
+																	as:'professor'}
+																	<option value="${professor?.id}" ${(disciplina?.id !=null && disciplina?.professor?.id == professor.id)? 'selected':'' }>${professor?.nome}</option>
+																	#{/list}
+																</select>
+																#{ifError 'disciplina.professores'}
+													        	   <div class="invalid-feedback">#{error 'disciplina.professores' /}</div>  	   		 
+													        	   #{/ifError}
+															</div>
+														</div>
+
+
+													</div>
+
+
+													<button type="submit" class="btn btn-success pull-right">Cadastrar</button>
+													<button type="reset" class="btn btn-primary pull-right">Limpar
+														Campos</button>
+													<div class="clearfix"></div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

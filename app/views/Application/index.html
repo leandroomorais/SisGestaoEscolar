@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SGE - Entrar</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="@{'/public/images/favicon-sge.png'}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/vendor/bootstrap/css/bootstrap.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/vendor/animate/animate.css'}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/vendor/css-hamburgers/hamburgers.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/vendor/select2/select2.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/css/util.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/assets/css/main.css'}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="@{'public/stylesheets/fonts.googleapis.css'}" />
+<!--===============================================================================================-->	
+	<link rel="stylesheet" href="@{'public/stylesheets/font-awesome.min.css'}">
+<!--===============================================================================================-->
+	<link href="@{'public/stylesheets/assets/css/material-dashboard.css'}" rel="stylesheet" />
+<!--===============================================================================================-->
+	<link href="@{'public/stylesheets/assets/demo/demo.css'}" rel="stylesheet" />
+<!--===============================================================================================-->
+	<link href="@{'/public/datatables/dataTables.bootstrap4.css'}" rel="stylesheet">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<!--===============================================================================================-->
+</head>
+<body>
+			<!-- Mensagem de Sucesso -->
+	#{if flash.success}
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<i class="material-icons">close</i>
+		</button>
+		<span> <b></b>${flash.success.raw()}
+		</span>
+	</div>
+	
+	#{/if}
+	
+	
+	<!-- Mensagem de erro -->
+	
+	#{if flash.error}
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<i class="material-icons">close</i>
+		</button>
+		<span> <b></b>${flash.error.raw()}
+		</span>
+	</div>
+	#{/if}
+	<div class="limiter">
+	
+		<div class="container-login100">
+		
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="@{'/public/images/logo-sge.png'}" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" action="@{SGE.login}" method="post">
+					<span class="login100-form-title">
+						SISTEMA DE GESTÃO ESCOLAR
+					</span>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="matricula" placeholder="Matricula">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-id-card-o" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "O campo senha é obrigatório">
+						<input class="input100" type="password" name="senha" placeholder="Senha">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Entrar
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Esqueceu sua
+						</span>
+						<a class="txt2" href="@{SGE.esqueceu}">
+							senha?
+						</a>
+					</div>
+					
+					
+				</form>
+				
+				<div class="text-center p-t-12">
+						<span class="txt1">
+							© 2018 Projeto Integrador I - IFRN. Todos os Direitos Reservados.  
+						</span>
+					</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="@{'/public/stylesheets/assets/vendor/jquery/jquery-3.2.1.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'/public/stylesheets/assets/vendor/bootstrap/js/popper.js'}"></script>
+	<script src="@{'/public/stylesheets/assets/vendor/bootstrap/js/bootstrap.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'/public/stylesheets/assets/vendor/select2/select2.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'/public/stylesheets/assets/vendor/tilt/tilt.jquery.min.js'}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="@{'/public/stylesheets/assets/js/main.js'}"></script>
+
+</body>
+</html>
